@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>My First Neural Network</title>
+
+    <style>
+      canvas{
+        position:absolute;
+        width:600;
+        height:600;
+        margin:auto;
+        left:0px;
+        right:0px;
+        top:0px;
+        bottom:0px;
+        background-color:rgb(0, 0, 0);
+        border:5px solid green;
+        border-radius: 10px
+      }
+
+      canvas.debug{
+        position:absolute;
+        width:600;
+        height:600;
+        margin:auto;
+        left:0px;
+        right:0px;
+        top:0px;
+        bottom:0px;
+        background-color:rgb(255, 255, 255);
+        border:5px solid rgb(0, 0, 0);
+        border-radius: 10px
+      }
+
+      #data{
+        width:200px;
+        height:200px;
+        background-color: black;
+        color: white;
+      }
+
+    </style>
+
+  </head>
+  <body id="body">
+
+    <div id="data">
+    <center>
+      <h3>Dados</h3>
+      <div id="datas"></div>
+    </center>
+    </div>
+
+    <canvas id="cnv" width="600" height="600"></canvas>
+
+    <script src="classes.js"></script>
+
+    <script>
+
+    const cnv = document.querySelector("canvas")
+    const ctx = cnv.getContext("2d")
+    
+    let debug = false
+
+    const player = new Player()
+    const enemy = new Enemy()
+
+    function loop() {
+
+      if(debug){
+        document.querySelector("canvas").classList.add("debug")
+      }
+
+      requestAnimationFrame(loop, cnv)
+      draw()
+      update()
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, cnv.width, cnv.height)
+      enemy.draw()
+      player.draw()
+      if(debug){
+      ctx.fillStyle = "black"
+      ctx.fillRect(player.x, player.y, 1, player.catAdj)
+      ctx.fillRect(player.x, player.y + player.catAdj, player.catOps, 1)
+      ctx.beginPath()
+      ctx.moveTo(player.x, player.y)
+      ctx.lineTo(enemy.x + enemy.width, enemy.y + enemy.height)
+      ctx.stroke()
+      }
+
+    }
+
+    function update() {
+      player.update()
+    }
+
+    loop()
+
+    </script>
+
+    <script src="Neural_Network.js"></script>
+
+  </body>
+</html>
