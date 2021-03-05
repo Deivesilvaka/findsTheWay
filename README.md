@@ -1,2 +1,2 @@
-# neural-network-findsTheWay
+# findsTheWay
 pequena neural feita em JavaScript 
